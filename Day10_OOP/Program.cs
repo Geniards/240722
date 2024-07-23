@@ -120,7 +120,7 @@ namespace Day10_OOP
 
      */
     #endregion
-    internal class Program
+    public class Program
     {
 
         #region 과제 1.
@@ -190,10 +190,39 @@ namespace Day10_OOP
         #endregion
 
         #region 과제 3.
-        class CharacterManager()
+        public class CharacterManager
         {
-            public Player player = new Player("게임매니저 용사");
-            public Monster monster = new Monster("게임매니저 몬스터");
+            protected  int level;
+            protected string name;
+
+            public CharacterManager(string _name)
+            {
+                this.name = _name;
+                level = 100;
+            }
+
+            public void INFO()
+            {
+                Console.WriteLine($"이름은 {name}이고 레벨은 {level} 이다.");
+            }
+        }
+
+        public class Player01 : CharacterManager
+        {
+            public Player01(string _name):base(_name)
+            {
+                name = "게임매니저 플레이어";
+                level =2;
+            }
+        }
+
+        public class Monster01 : CharacterManager
+        {
+            public Monster01(string _name) : base(_name)
+            {
+                name = "게임매니저 몬스터";
+                level = 20;
+            }
         }
         #endregion
 
@@ -202,7 +231,6 @@ namespace Day10_OOP
         {
             Player player = new Player("용사");
             Monster monster = new Monster("몬스터");
-            CharacterManager characterManager = new CharacterManager();
 
             //과제 2
             player.Hp = 100.0f;
@@ -221,21 +249,13 @@ namespace Day10_OOP
             monster.TakeDamage(monster.name, player.Atk);
 
             //과제 3
-            characterManager.player.Hp = 200.0f;
-            characterManager.player.level = 2;
-            characterManager.player.Speed = 400.0f;
-            characterManager.player.Atk = 40.0f;
-            characterManager.player.bHit = false;
-
-            characterManager.monster.Hp = 600.0f;
-            characterManager.monster.level = 20;
-            characterManager.monster.Speed = 200.0f;
-            characterManager.monster.Atk = 70.0f;
-            characterManager.monster.bHit = true;
-
-            characterManager.player.TakeDamage(characterManager.player.name, characterManager.monster.Atk);
-            characterManager.monster.TakeDamage(characterManager.monster.name, characterManager.player.Atk);
-
+            CharacterManager characterManager = new CharacterManager("게임매니저생성자입니다.");
+            CharacterManager player01 = new Player01("");
+            CharacterManager monster01 = new Monster01("");
+            Console.WriteLine();
+            characterManager.INFO();
+            player01.INFO();
+            monster01.INFO();
         }
         #endregion
     }
